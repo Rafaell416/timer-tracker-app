@@ -4,26 +4,49 @@ import {
   View,
   StyleSheet
 } from 'react-native'
+import { AppLoading } from 'expo'
 import Header from '@/components/Header'
 import Button from '@/components/Button'
 import { MaterialIcons } from '@expo/vector-icons'
+import { cacheFonts } from './src/utils'
 
 export default class App extends React.Component {
+  state = { isReady: false }
+
+  _preloadAssets = async () => {
+    const fontAssets = cacheFonts([
+      { 'proxima-nova-semibold': require('./assets/fonts/proxima-nova-semibold.otf') }
+    ])
+
+    await Promise.all([...fontAssets])
+  } 
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Header title="Time Tracker"/>
-        <View style={styles.buttonContainer}>
-          <Button 
-            textStyles={ styles.buttonTextStyles }
-            containerStyles={ styles.buttonContainerStyles }
-          >
-            <MaterialIcons name="add" size={25} color="#4a4a4a" />
-          </Button>
-        </View>
-      </View>
-    )
-  }
+    const { isReady } = this.state
+    if ( !isReady ) {
+      return (
+        <AppLoading
+          startAsync={ this._preloadAssets }
+          onFinish={() => this.setState({ isReady: true })}
+        />
+      )
+    } else {
+        return (
+          <View style={styles.container}>
+            <Header title="Time Tracker"/>
+            <View style={styles.buttonContainer}>
+              <Button 
+                textStyles={ styles.buttonTextStyles }
+                containerStyles={ styles.buttonContainerStyles }
+              >
+                <MaterialIcons name="add" size={25} color="#4a4a4a" />
+              </Button>
+            </View>
+    
+          </View>
+        )
+      } 
+    }
 }
 
 const styles = StyleSheet.create({

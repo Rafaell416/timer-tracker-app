@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: '600',
-    color: 'white'
+    color: 'white',
+    fontFamily: 'proxima-nova-semibold'
   },
   statusBar: {
     height: Constants.statusBarHeight,
