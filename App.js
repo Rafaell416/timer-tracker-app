@@ -7,6 +7,7 @@ import {
 import { AppLoading } from 'expo'
 import Header from '@/components/Header'
 import Button from '@/components/Button'
+import Timer from '@/components/Timer'
 import { MaterialIcons } from '@expo/vector-icons'
 import { cacheFonts } from './src/utils'
 
@@ -42,6 +43,10 @@ export default class App extends React.Component {
                 <MaterialIcons name="add" size={25} color="#4a4a4a" />
               </Button>
             </View>
+            <View style={styles.timerContainer}>
+              <Timer />
+            </View>
+            
     
           </View>
         )
@@ -67,5 +72,8 @@ const styles = StyleSheet.create({
   buttonContainerStyles: {
     backgroundColor: 'white',
     borderColor: '#4a4a4a'
+  },
+  timerContainer: {
+    paddingHorizontal: 15
   }
 })
