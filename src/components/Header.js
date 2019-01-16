@@ -6,6 +6,7 @@ import {
   Platform,
   StyleSheet
 } from 'react-native'
+import PropTypes from 'prop-types'
 
 function Header ({ title }) {
   return (
@@ -16,6 +17,10 @@ function Header ({ title }) {
       </View>
     </View>
   )
+} 
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired
 } 
 
 const styles = StyleSheet.create({
