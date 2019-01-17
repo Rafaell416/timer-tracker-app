@@ -8,6 +8,7 @@ import { AppLoading } from 'expo'
 import Header from '@/components/Header'
 import Button from '@/components/Button'
 import Timer from '@/components/Timer'
+import TimerForm from '@/components/TimerForm'
 import { MaterialIcons } from '@expo/vector-icons'
 import { cacheFonts } from './src/utils'
 
@@ -43,8 +44,11 @@ export default class App extends React.Component {
                 <MaterialIcons name="add" size={25} color="#4a4a4a" />
               </Button>
             </View>
-            <View style={styles.timerContainer}>
+            {/* <View style={styles.timerContainer}>
               <Timer />
+            </View> */}
+            <View style={styles.timerContainer}>
+              <TimerForm />
             </View>
             
     
