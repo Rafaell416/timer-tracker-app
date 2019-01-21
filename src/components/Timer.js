@@ -6,12 +6,22 @@ import {
 } from 'react-native'
 import Buttom from './Button'
 
-function Timer ({ project, task, buttons }) {
+function Timer ({ 
+    id,
+    project, 
+    title, 
+    elapsed, 
+    isRunning, 
+    onStartPress, 
+    onStopPress,
+    onRemovePress,
+    onEditPress
+}) {
   return (
     <View style={styles.container}>
       <View style={styles.fullWidth}>
-        <Text style={[styles.textStyle, styles.boldStyle]}>Bootcamp</Text>
-        <Text style={styles.textStyle}>Create timer app</Text>
+        <Text style={[styles.textStyle, styles.boldStyle]}>{ title }</Text>
+        <Text style={styles.textStyle}>{ project }</Text>
       </View>
       <View style={styles.timerView}>
         <Text style={[styles.textStyle, styles.boldStyle, styles.timerText]}>01:31:00</Text>
@@ -22,6 +32,7 @@ function Timer ({ project, task, buttons }) {
             text="Edit"
             textStyles={[styles.textStyle, styles.smallButton]}
             containerStyles={styles.smallButton}
+            onPress={ onEditPress }
           />
         </View>
         <View style={[styles.removeButtonView, styles.flex]}>
@@ -29,15 +40,26 @@ function Timer ({ project, task, buttons }) {
             text="Remove"
             textStyles={[styles.textStyle, styles.smallButton]}
             containerStyles={styles.smallButton}
+            onPress={() => onRemovePress( id )}
           />
         </View>
       </View>
       <View style={[styles.editAndRemoveButtonsView, { marginTop: 10 }]}>
-        <Buttom 
-          text="Start"
-          textStyles={[styles.textStyle, styles.largeButton]}
-          containerStyles={styles.largeButton}
-        />
+        {isRunning ? (
+          <Buttom 
+            text="Stop"
+            textStyles={[styles.textStyle, styles.stopButton]}
+            containerStyles={styles.stopButton}
+            onPress={ this._handleStopPress }
+          />
+        ): (
+          <Buttom 
+            text="Start"
+            textStyles={[styles.textStyle, styles.largeButton]}
+            containerStyles={styles.largeButton}
+            onPress={ this._handleStartPress }
+          />
+        )}
       </View>
     </View>
   )
@@ -88,6 +110,10 @@ const styles = StyleSheet.create({
   largeButton: {
     color: '#2ecc71',
     borderColor: '#2ecc71'
+  },
+  stopButton: {
+    color: '#e74c3c',
+    borderColor: '#e74c3c'
   }
 })
 

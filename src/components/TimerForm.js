@@ -10,13 +10,21 @@ import Button from './Button'
 import InputField from './InputField'
 
 class TimerForm extends Component {
-  state = {
-    title: '',
-    project: ''
+  constructor(props){
+    super(props)
+    const { title, project } = props
+
+    this.state = {
+      title: title ? title : '',
+      project: project ? project : ''
+    }
   }
 
   render () {
     const { title, project } = this.state
+    const { id, onFormClose, onFormSubmit } = this.props
+    const submitText = id ? "Update" : "Create"
+
     return (
       <View style={styles.container}>
         <InputField 
@@ -34,9 +42,10 @@ class TimerForm extends Component {
         <View style={styles.buttonsView}>
           <View style={[styles.flex, styles.createButtonView]}>
             <Button 
-              text="Create"
+              text={ submitText }
               textStyles={styles.createButtonStyle}
               containerStyles={styles.createButtonStyle}
+              onPress={ onFormSubmit }
             />
           </View>
           <View style={[styles.flex, styles.cancelButtonView]}>
@@ -44,6 +53,7 @@ class TimerForm extends Component {
               text="Cancel"
               textStyles={styles.cancelButtonStyle}
               containerStyles={styles.cancelButtonStyle}
+              onPress={ onFormClose }
             />
           </View>
         </View>

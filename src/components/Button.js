@@ -9,16 +9,16 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 
-function Button ({ containerStyles, textStyles, children, disabled, text }) {
+function Button ({ containerStyles, textStyles, children, disabled, text, onPress }) {
   return (
    Platform.select({
      ios: (
-      <TouchableOpacity disabled={ disabled } style={[styles.container, containerStyles]}>
+      <TouchableOpacity onPress={ onPress } disabled={ disabled } style={[styles.container, containerStyles]}>
         { text ? <Text style={textStyles}>{text}</Text> : children }
       </TouchableOpacity>
      ),
      android: (
-      <TouchableNativeFeedback disabled={ disabled }>
+      <TouchableNativeFeedback onPress={ onPress } disabled={ disabled }>
         <View style={[styles.container, containerStyles]}>
           { text ? <Text style={textStyles}>{text}</Text> : children }
         </View>
