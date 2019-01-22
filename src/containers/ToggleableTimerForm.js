@@ -20,7 +20,7 @@ class ToggleableTimerForm extends Component {
         {isOpen ? (
           <View style={styles.timerContainer}>
             <TimerForm 
-              onFormClose={ this._toggleForm }
+              onFormClose={ this._toggleForm } 
             />
           </View>
         ) : (
