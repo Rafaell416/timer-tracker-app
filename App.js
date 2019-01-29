@@ -51,6 +51,29 @@ class App extends React.Component {
     this.setState({ timers: [newTimer(timer), ...timers] })
   }
 
+  _handleRemoveTimer = (id) => {
+    const { timers } = this.state
+    this.setState({ timers: timers.filter(timer => timer.id !== id) })
+  }
+
+  _handleEditTimer = (timer) => {
+    const { timers } = this.state
+    const { id, title, project } = timer
+    this.setState({
+      timers: timers.map(timer => {
+        if ( timer.id === id) {
+          const updatedTimer = {
+            ...timer,
+            title,
+            project
+          }
+          return updatedTimer
+        }
+        return timer
+      })
+    })
+  } 
+
   render() {
     const { isReady, timers } = this.state
     if ( !isReady ) {
@@ -76,8 +99,8 @@ class App extends React.Component {
                   project={ project }
                   elapsed={ elapsed }
                   isRunning={ isRunning }
-                  onFormSubmit={ () => null } //this.handleFormSubmit
-                  onRemovePress={() => null } //this.handleRemovePress
+                  onFormSubmit={ this._handleEditTimer }
+                  onRemovePress={ this._handleRemoveTimer }
                   onStartPress={() => null } //this.toggleTimer
                   onStopPress={() => null } //this.toggleTimer
                 />

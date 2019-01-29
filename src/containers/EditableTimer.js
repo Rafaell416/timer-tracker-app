@@ -11,6 +11,12 @@ class EditableTimer extends Component {
 
   _toggleForm = () => this.setState({ editFormOpen: !this.state.editFormOpen })
 
+  _handleEditTimer = (timer) => {
+    const { onFormSubmit } = this.props
+    onFormSubmit(timer)
+    this._toggleForm()
+  }
+
   render () {
     const { editFormOpen } = this.state
     const { 
@@ -30,7 +36,7 @@ class EditableTimer extends Component {
             id={ id }
             title={ title }
             project={ project }
-            onFormSubmit={() => null}
+            onFormSubmit={ this._handleEditTimer }
             onFormClose={ this._toggleForm }
           />
         ) : (

@@ -21,7 +21,6 @@ class ToggleableTimerForm extends Component {
 
   render () {
     const { isOpen } = this.state
-    const { onFormSubmit } = this.props
     return (
       <React.Fragment>
         {isOpen ? (
