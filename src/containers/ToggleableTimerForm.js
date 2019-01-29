@@ -13,14 +13,22 @@ class ToggleableTimerForm extends Component {
 
   _toggleForm = () => this.setState({ isOpen: !this.state.isOpen })
 
+  _handleFormSubmit = (timer) => {
+    const { onFormSubmit } = this.props
+    onFormSubmit(timer)
+    this._toggleForm()
+  }
+
   render () {
     const { isOpen } = this.state
+    const { onFormSubmit } = this.props
     return (
       <React.Fragment>
         {isOpen ? (
           <View style={styles.timerContainer}>
             <TimerForm 
-              onFormClose={ this._toggleForm } 
+              onFormClose={ this._toggleForm }
+              onFormSubmit={ this._handleFormSubmit }
             />
           </View>
         ) : (

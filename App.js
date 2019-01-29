@@ -9,7 +9,7 @@ import { AppLoading } from 'expo'
 import Header from '@/components/Header'
 import ToggleableTimerForm from '@/containers/ToggleableTimerForm'
 import EditableTimer from '@/containers/EditableTimer'
-import { cacheFonts } from './src/utils'
+import { cacheFonts, newTimer } from './src/utils'
 
 class App extends React.Component {
   state = { 
@@ -19,7 +19,7 @@ class App extends React.Component {
         id: v4(),
         title: 'Create weather app',
         project: 'Bootcamp',
-        elapsed: 5460494,
+        elapsed: 1277537,
         isRunning: false,
       },
       {
@@ -27,13 +27,13 @@ class App extends React.Component {
         title: 'Create timer app',
         project: 'Bootcamp',
         elapsed: 5460494,
-        isRunning: false,
+        isRunning: true,
       },
       {
         id: v4(),
         title: 'Create instagram app',
         project: 'Bootcamp',
-        elapsed: 5460494,
+        elapsed: 120000,
         isRunning: false,
       }
     ]
@@ -45,6 +45,11 @@ class App extends React.Component {
     ])
     await Promise.all([...fontAssets])
   } 
+
+  _handleCreateTimer = (timer) => {
+    const { timers } = this.state
+    this.setState({ timers: [newTimer(timer), ...timers] })
+  }
 
   render() {
     const { isReady, timers } = this.state
@@ -60,7 +65,7 @@ class App extends React.Component {
           <View style={styles.container}>
             <Header title="Time Tracker"/>
             <ToggleableTimerForm 
-              onFormSubmit={() => null} //this.handleCreateFormSubmit
+              onFormSubmit={ this._handleCreateTimer }
             />
             <ScrollView style={styles.container}>
               {timers.map(({ id, title, project, isRunning, elapsed }) => (

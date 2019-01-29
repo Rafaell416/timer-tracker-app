@@ -20,9 +20,15 @@ class TimerForm extends Component {
     }
   }
 
+  _handleFormSubmit = () => {
+    const { onFormSubmit, id } = this.props
+    const { title, project } = this.state
+    onFormSubmit({ id, title, project })
+  }
+
   render () {
     const { title, project } = this.state
-    const { id, onFormClose, onFormSubmit } = this.props
+    const { id, onFormClose } = this.props
     const submitText = id ? "Update" : "Create"
 
     return (
@@ -45,7 +51,7 @@ class TimerForm extends Component {
               text={ submitText }
               textStyles={styles.createButtonStyle}
               containerStyles={styles.createButtonStyle}
-              onPress={ onFormSubmit }
+              onPress={ this._handleFormSubmit }
             />
           </View>
           <View style={[styles.flex, styles.cancelButtonView]}>

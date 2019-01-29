@@ -5,6 +5,7 @@ import {
   StyleSheet
 } from 'react-native'
 import Buttom from './Button'
+import { milisecondsToHuman } from '@/utils'
 
 function Timer ({ 
     id,
@@ -24,7 +25,7 @@ function Timer ({
         <Text style={styles.textStyle}>{ project }</Text>
       </View>
       <View style={styles.timerView}>
-        <Text style={[styles.textStyle, styles.boldStyle, styles.timerText]}>01:31:00</Text>
+        <Text style={[styles.textStyle, styles.boldStyle, styles.timerText]}>{milisecondsToHuman(elapsed)}</Text>
       </View>
       <View style={[styles.editAndRemoveButtonsView, styles.fullWidth]}>
         <View style={[styles.editButtonView, styles.flex]}>
