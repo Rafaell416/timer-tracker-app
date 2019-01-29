@@ -39,12 +39,12 @@ class App extends React.Component {
     ]
   }
 
-  _preloadAssets = async () => {
+    _preloadAssets = async () => {
     const fontAssets = cacheFonts([
       { 'proxima-nova-semibold': require('./assets/fonts/proxima-nova-semibold.otf') }
     ])
     await Promise.all([...fontAssets])
-  } 
+  }
 
   _handleCreateTimer = (timer) => {
     const { timers } = this.state
