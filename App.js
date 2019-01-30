@@ -20,14 +20,14 @@ class App extends React.Component {
         title: 'Create weather app',
         project: 'Bootcamp',
         elapsed: 1277537,
-        isRunning: false,
+        isRunning: true,
       },
       {
         id: v4(),
         title: 'Create timer app',
         project: 'Bootcamp',
         elapsed: 5460494,
-        isRunning: true,
+        isRunning: false,
       },
       {
         id: v4(),
@@ -39,7 +39,7 @@ class App extends React.Component {
     ]
   }
 
-    _preloadAssets = async () => {
+  _preloadAssets = async () => {
     const fontAssets = cacheFonts([
       { 'proxima-nova-semibold': require('./assets/fonts/proxima-nova-semibold.otf') }
     ])
@@ -59,6 +59,7 @@ class App extends React.Component {
   _handleEditTimer = (timer) => {
     const { timers } = this.state
     const { id, title, project } = timer
+
     this.setState({
       timers: timers.map(timer => {
         if ( timer.id === id) {
@@ -73,6 +74,26 @@ class App extends React.Component {
       })
     })
   } 
+
+  componentDidMount () {
+    const TIME_INTERVAL = 1000
+    this.intervalId = setInterval(() => {
+      const { timers } = this.state
+      this.setState({
+        timers: timers.map(timer => {
+          const { isRunning, elapsed } = timer
+          return {
+            ...timer,
+            elapsed: isRunning ? elapsed + TIME_INTERVAL : elapsed
+          }
+        })
+      })
+    }, TIME_INTERVAL)
+  }
+
+  componentWillUnmount () {
+    clearInterval( this.intervalId )
+  }
 
   render() {
     const { isReady, timers } = this.state
