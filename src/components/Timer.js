@@ -51,14 +51,14 @@ function Timer ({
             text="Stop"
             textStyles={[styles.textStyle, styles.stopButton]}
             containerStyles={styles.stopButton}
-            onPress={ this._handleStopPress }
+            onPress={() => onStopPress( id ) }
           />
         ): (
           <Buttom 
             text="Start"
             textStyles={[styles.textStyle, styles.largeButton]}
             containerStyles={styles.largeButton}
-            onPress={ this._handleStartPress }
+            onPress={() => onStartPress( id ) }
           />
         )}
       </View>

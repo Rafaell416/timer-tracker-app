@@ -95,6 +95,23 @@ class App extends React.Component {
     clearInterval( this.intervalId )
   }
 
+  _toggleTimerRunning = ( id ) => {
+    const { timers } = this.state
+    this.setState({
+      timers: timers.map(timer => {
+        const { isRunning } = timer
+        if ( timer.id === id ) {
+          const updatedTimer = {
+            ...timer,
+            isRunning: !isRunning
+          }
+          return updatedTimer
+        }
+        return timer
+      })
+    })
+  } 
+
   render() {
     const { isReady, timers } = this.state
     if ( !isReady ) {
@@ -122,8 +139,8 @@ class App extends React.Component {
                   isRunning={ isRunning }
                   onFormSubmit={ this._handleEditTimer }
                   onRemovePress={ this._handleRemoveTimer }
-                  onStartPress={() => null } //this.toggleTimer
-                  onStopPress={() => null } //this.toggleTimer
+                  onStartPress={ this._toggleTimerRunning } 
+                  onStopPress={ this._toggleTimerRunning  }
                 />
               ))}    
             </ScrollView>
